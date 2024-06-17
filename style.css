@@ -174,10 +174,12 @@ h2, h1 {
 
 html {
 	overflow: hidden;
+	overflow-x: hidden;
 }
 
 body {
 	overflow: hidden;
+	overflow-x: hidden;
 	margin: auto;
 	width: 960px;
 	height: 100%;
