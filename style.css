@@ -172,8 +172,12 @@ h2, h1 {
 }
 
 
+html {
+	overflow: hidden;
+}
 
 body {
+	overflow: hidden;
 	margin: auto;
 	width: 960px;
 	height: 100%;
