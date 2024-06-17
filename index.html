@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ソリティア</title>
+
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link hrel="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/b3b03cb8e0.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+</head>
+
+<body>
+	<header>
+		<h3>Solitaire</h3>
+		<p id="time" class="fa-regular fa-clock" >0:00:00</p>
+		<button class="fa-solid fa-pause" onclick="stop();"></button>
+	</header>
+
+	<main>
+		<div id="box-a">
+			<div class="box-a"></div>
+			<div class="box-a"></div>
+			<div class="box-a"></div>
+			<div class="box-a"></div>
+		</div>
+		<div id ="temp">
+			<div class="K">K</div>
+			<div class="K">K</div>
+			<div class="K">K</div>
+			<div class="K">K</div>
+			<div class="K">K</div>
+			<div class="K">K</div>
+			<div class="K">K</div>
+		</div>
+		<div id="box-k">
+			<div class="box-k" id="card0"></div>
+			<div class="box-k" id="card1"></div>
+			<div class="box-k" id="card2"></div>
+			<div class="box-k" id="card3"></div>
+			<div class="box-k" id="card4"></div>
+			<div class="box-k" id="card5"></div>
+			<div class="box-k" id="card6"></div>
+		</div>
+
+		<div id="modalMusk"></div>
+		<div id="modal">
+			<h1>Solitaire</h1>
+			<div id="menu1">
+				<button id="continue" onclick="continueGame();">続きから</button>
+				<button id="start" onclick="start();">START</button>
+			</div>
+			<div id="menu2">
+				<button class="fa-solid fa-info" onclick="information();"></button>
+				<button class="fa-solid fa-gear" onclick="set();"></button>
+			</div>
+		</div>
+		
+		<div id="set">
+			<button class="fa-solid fa-xmark" onclick="closeS();"></button>
+			<div id="radio">
+				<h2>Setting</h2>
+				<div id="music">
+					<p>BGM</p>
+					<button class="fa-solid fa-volume-high" onclick="play();"></button>
+					<button class="fa-solid fa-volume-xmark" onclick="pause();"></button>
+					<audio src="https://pocket-se.info/se/surunvaisseau.mp3" id="classic" loop></audio>
+				</div>
+				<div id="mode">
+					<p>画面の明るさ</p>
+					<button class="fa-regular fa-lightbulb" onclick="light();"></button>
+					<button class="fa-solid fa-lightbulb" onclick="dark();"></button>
+				</div>
+			</div>
+		</div>
+
+		<div id = "information">
+			<button class="fa-solid fa-xmark" onclick="closeInfo();"></button>
+			<div id="rule">
+				<h2>ルール</h2>
+				<p>上の4つの組札にAから順に同じマークのカードが置けます</p>
+				<p>各列の最後尾に数字が1つ小さい同じマークのカードが置けます</p>
+				<p>空になった列にはKのカードが置けます</p>
+				<p>全ての列が空になったらゲームクリアです</p>
+			</div>
+		</div>
+
+		<div id= "gameClear"> 
+			<h2>Well done!</h2>
+			<p id="record">0:00:00</p>
+			<div id="menu1">
+				<button id="start" onclick="restart();">もう一度</button>
+			</div>
+		</div>
+	</main>
+
+	<script type="text/javascript" src="./main.js"></script>
+
+</body>
+</html>

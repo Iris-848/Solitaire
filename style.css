@@ -1,0 +1,242 @@
+header {
+	color: white;
+	margin: 30px 0 80px 0;
+	display: grid;
+	gap: 100px;
+	grid-auto-flow: column;
+	align-items: center;
+}
+
+
+.box-a {
+	color: white;
+	width: 70px;
+	height: 110px;
+	border: solid 1px white;
+	border-radius: 10%;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+}
+#box-a, #box-k {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: center;
+}
+#box-a {
+	gap: 20px;
+}
+#box-k {
+	width: 960px;
+	position: relative;
+	top: -120px;
+}
+.box-k {
+	display: inline-block;
+	height: 1400px;
+	width: 80px;
+	margin: -2px 11px 0 11px;
+}
+		
+.cardAll {
+	background: white;
+	font-size: 20px;
+	padding: 5px;
+	width: 70px;
+	height: 110px;
+	border: solid 1px black;
+	border-radius: 10%;
+	position: relative;
+}
+.cardRed {
+	color: red;
+	background: white;
+	font-size: 20px;
+	padding: 5px;
+	width: 70px;
+	height: 110px;
+	border: solid 1px black;
+	border-radius: 10%;
+}
+.cardBlack {
+	color: black;
+	background: white;
+	font-size: 20px;
+	padding: 5px;
+	width: 70px;
+	height: 110px;
+	border: solid 1px black;
+	border-radius: 10%;
+}
+#modalMusk {
+	background: black;
+	opacity: 0.5;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+#modal, #information, #gameClear  {
+	background: white;
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	display: grid;
+	gap: 10px;
+	justify-content: center;
+    	align-content: center;
+	justify-items: center;
+}
+#start, #continue {
+	font-size: 20px;
+	width: 200px;
+	height: 60px;
+	border-top: 2px dotted #1ca11c;
+}
+#start {
+	border-bottom: 2px dotted #1ca11c;
+}
+#menu1 {
+	display: grid;
+}
+#menu2 {
+	width: 200px;
+	height: 40px;
+	display: grid;
+	gap: 15px;
+	grid-auto-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#set {
+	background: white;
+	width: 600px;
+	height: 400px;
+	position: absolute;
+}
+#radio {
+	display: grid;
+	justify-content: center;
+}
+.fa-xmark {
+	font-size: 30px;
+    	margin: 25px 0 10px 520px;
+}
+.fa-volume-xmark, .fa-volume-high, .fa-lightbulb , .fa-xmark, .fa-pause, #time, .fa-solid, .fa-regular, h3{
+    	border: none;
+	width: 70px;
+    	background: none;
+	background: linear-gradient(0deg,#91bd52,#85ddf3);
+	background: -webkit-linear-gradient(0deg,#91bd52,#85ddf3);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	position: relative;
+  	opacity: 0; /* 初めは透明に設定 */
+  	transform: translateY(100%); /* 下からスライドするために位置を下に設定 */
+  	animation: fadeInFromBottom 1s forwards; /* フェードインアニメーションの設定 */
+}
+.fa-solid, .fa-regular {
+	font-size: 25px;
+	padding: 10px;
+}
+#time {
+	width: 200px;
+	font-size: 30px;
+	margin-right: 50px;
+	display: grid;
+	gap: 10px;
+	grid-auto-flow: column;
+}
+.fa-pause {
+	font-size: 40px;
+	border-radius: 50%;
+}
+h2, h1 {
+	margin: 0;
+	text-align: center;
+}
+#radio p {
+	color: #084008;
+	margin: 20px 0 0 10px;
+    	border-bottom: 2px dotted #1ca11c;
+}
+#music, #mode {
+	font-size: 20px;
+}
+#rule {
+	height: 350px;
+	text-align: center;
+}
+
+
+
+body {
+	margin: auto;
+	width: 960px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: radial-gradient(#1ca11c, #084008);
+}
+#dark {
+	background: black;
+}
+main {
+	display: grid;
+	justify-items: center;
+}
+#temp {
+	display: flex;
+}
+.K {
+	display: grid;
+	width: 70px; 
+	height: 110px; 
+	padding: 5px; 
+	margin: 30px 10px 0 10px;
+	border-radius: 10%;
+	text-align: center;
+	align-content: center;
+	color: white; 
+	border: 1px solid white;
+}
+
+h1, h2, p, button {
+
+	border: none;
+
+	font-family: 'Playfair Display', serif;
+
+	background: linear-gradient(0deg,#6eba00,#e1605a);
+	background: -webkit-linear-gradient(0deg,#6eba00,#e1605a);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	position: relative;
+  	opacity: 0; /* 初めは透明に設定 */
+  	transform: translateY(100%); /* 下からスライドするために位置を下に設定 */
+  	animation: fadeInFromBottom 1s forwards; /* フェードインアニメーションの設定 */
+}
+
+h1 {
+	font-size: 40px;
+}
+h2 {
+	font-size: 30px;
+}
+p {
+	font-size: 18px;
+}
+
+@keyframes fadeInFromBottom {
+  to {
+    opacity: 1; /* アニメーション終了時に完全に表示 */
+    transform: translateY(0); /* アニメーション終了時の位置 */
+  }
+}
+
+ 
