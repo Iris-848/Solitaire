@@ -35,7 +35,7 @@ header {
 	display: inline-block;
 	height: 1400px;
 	width: 80px;
-	margin: -2px 11px 0 11px;
+	margin: 0 12px 0 11px;
 }
 		
 .cardAll {
@@ -190,14 +190,15 @@ main {
 	justify-items: center;
 }
 #temp {
-	display: flex;
+	display: grid;
+    	grid-auto-flow: column;
+    	gap: 30px;
+    	margin-top: 30px;
 }
 .K {
 	display: grid;
 	width: 70px; 
 	height: 110px; 
-	padding: 5px; 
-	margin: 30px 10px 0 10px;
 	border-radius: 10%;
 	text-align: center;
 	align-content: center;
@@ -238,5 +239,4 @@ p {
     transform: translateY(0); /* アニメーション終了時の位置 */
   }
 }
-
  
