@@ -186,8 +186,10 @@ body {
 	background: black;
 }
 main {
-	display: grid;
-	justify-items: center;
+	display: flex;
+    	justify-items: center;
+    	justify-content: center;
+    	flex-wrap: wrap;
 }
 #temp {
 	display: grid;
