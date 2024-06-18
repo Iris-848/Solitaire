@@ -450,6 +450,15 @@ interact('.box-k').dropzone({
 	}
 })
 
+//ドラッグ中は重なりを上にする
+.on("dropactivate", (event) => {
+	event.relatedTarget.style.zIndex = "52";
+})
+
+//ドラッグ中止は重なりを元に戻す
+.on("dropdeactivate", (event) => {
+	event.relatedTarget.style.zIndex = "0";
+})
 
 //もう一度を押したら関数を呼び出す
 function restart(){
