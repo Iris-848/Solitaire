@@ -40,7 +40,7 @@ header {
 		
 .cardAll {
 	background: white;
-	font-size: 20px;
+	font-size: 25px;
 	padding: 5px;
 	width: 70px;
 	height: 110px;
@@ -51,7 +51,7 @@ header {
 .cardRed {
 	color: red;
 	background: white;
-	font-size: 20px;
+	font-size: 25px;
 	padding: 5px;
 	width: 70px;
 	height: 110px;
@@ -61,7 +61,7 @@ header {
 .cardBlack {
 	color: black;
 	background: white;
-	font-size: 20px;
+	font-size: 25px;
 	padding: 5px;
 	width: 70px;
 	height: 110px;
