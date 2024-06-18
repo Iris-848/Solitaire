@@ -39,7 +39,7 @@ function resetCard(){
 	// box-a(組札)を初期化
 	for (let i = 0; i < 4; i++){
 		const addA = document.getElementsByClassName("box-a");
-		addA[i].innerHTML = "A "+ mark[i];
+		addA[i].innerHTML = "A"+ mark[i];
 	}
 }
 
