@@ -376,8 +376,12 @@ interact('.box-k').dropzone({
 			for (let i = 0; i < 4; i++){
     				for (let j = 0; j < number.length; j++) {
 
+					// 同じ列だった場合
+					if (target == relatedTarget.parentElement){
+						relatedTarget.style.transform = "translate(0, 0)";
+
 					// マークが同じで数字が1つ小さい場合
-        				if ( lastH?.includes(mark[i]) && relatedH.includes(mark[i]) && lastH?.includes(number[j + 1]) && relatedH.includes(number[j]) ) {
+        				}else if ( lastH?.includes(mark[i]) && relatedH.includes(mark[i]) && lastH?.includes(number[j + 1]) && relatedH.includes(number[j]) ) {
 
 						// ドロップ範囲に書き換える
             					target.innerHTML += "<div class='cardAll' id='"+number[j + 1]+"' draggable='true' style='position: relative;'>"+relatedH+"</div>"
