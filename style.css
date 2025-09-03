@@ -1,6 +1,6 @@
 header {
 	color: white;
-	margin: 30px 0 80px 0;
+	margin: 30px 0;
 	display: grid;
 	gap: 100px;
 	grid-auto-flow: column;
@@ -10,11 +10,11 @@ header {
 
 .box-a {
 	color: white;
-	width: 70px;
-	height: 110px;
+	width: 120px;
+	height: 170px;
 	font-size: 30px;
 	border: solid 1px white;
-	border-radius: 10%;
+	border-radius: 3%;
 	display: grid;
 	align-items: center;
 	justify-content: center;
@@ -30,45 +30,25 @@ header {
 #box-k {
 	width: 960px;
 	position: relative;
-	top: -120px;
+	top: -170px;
+	gap: 2px;
 }
 .box-k {
 	display: inline-block;
 	height: 1400px;
-	width: 80px;
-	margin: 0 12px 0 11px;
+	width: 120px;
 }
-		
+
 .cardAll {
-	background: white;
-	font-size: 25px;
-	padding: 5px;
-	width: 70px;
-	height: 110px;
-	border: solid 1px black;
-	border-radius: 10%;
+	width: 120px;
+	height: 170px;
 	position: relative;
 }
-.cardRed {
-	color: red;
-	background: white;
-	font-size: 25px;
-	padding: 5px;
-	width: 70px;
-	height: 110px;
-	border: solid 1px black;
-	border-radius: 10%;
+img{
+	width: 120px;
+    	height: 170px;
 }
-.cardBlack {
-	color: black;
-	background: white;
-	font-size: 25px;
-	padding: 5px;
-	width: 70px;
-	height: 110px;
-	border: solid 1px black;
-	border-radius: 10%;
-}
+
 #modalMusk {
 	background: black;
 	opacity: 0.5;
@@ -193,14 +173,13 @@ main {
 #temp {
 	display: grid;
     	grid-auto-flow: column;
-    	gap: 30px;
-    	margin-top: 30px;
+    	margin-top: 50px;
 }
 .K {
 	display: grid;
-	width: 70px; 
-	height: 110px; 
-	border-radius: 10%;
+	width: 120px; 
+	height: 168px; 
+	border-radius: 3%;
 	text-align: center;
 	align-content: center;
 	color: white; 
@@ -240,4 +219,3 @@ p {
     transform: translateY(0); /* アニメーション終了時の位置 */
   }
 }
- 
