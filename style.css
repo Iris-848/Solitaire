@@ -7,7 +7,6 @@ header {
 	align-items: center;
 }
 
-
 .box-a {
 	color: white;
 	width: 120px;
@@ -142,7 +141,7 @@ h2, h1 {
 #radio p {
 	color: #084008;
 	margin: 20px 0 0 10px;
-    	border-bottom: 2px dotted #1ca11c;
+    border-bottom: 2px dotted #1ca11c;
 }
 #music, #mode {
 	font-size: 20px;
