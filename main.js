@@ -62,7 +62,7 @@ function makeCard(){
 		cardId = document.getElementById("card"+i);
 		for (let j = 0; j < slice[i].length; j++) {
 			const sliceArray = slice[i];
-			cardId.innerHTML += '<div class="cardAll" data-mark="' + sliceArray[j].mark + '" data-number="' + sliceArray[j].number + '" draggable="true"><img src="trump/' + sliceArray[j].mark + '-' + sliceArray[j].number + '.png"></div>';
+			cardId.innerHTML += '<div class="cardAll" data-mark="' + sliceArray[j].mark + '" data-number="' + sliceArray[j].number + '" draggable="true"><img src="./trump/' + sliceArray[j].mark + '-' + sliceArray[j].number + '.png"></div>';
 			
 			// CSSを挿入
 			const cardStyle= cardId.children
