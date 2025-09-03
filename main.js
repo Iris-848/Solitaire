@@ -43,7 +43,7 @@ function resetCard(){
 		const addA = document.getElementsByClassName("box-a");
 		addA[i].dataset.number = "1";
 		addA[i].dataset.mark = mark[i];
-		addA[i].innerHTML = '<img src="trump/' + mark[i] + '-1' + '.png" style="opacity:0.3;" draggable="false">';
+		addA[i].innerHTML = '<img src="trump/' + mark[i] + '-1' + '.PNG" style="opacity:0.3;" draggable="false">';
 
 	// 試行回数を初期化
 	count = 0;
@@ -62,7 +62,7 @@ function makeCard(){
 		cardId = document.getElementById("card"+i);
 		for (let j = 0; j < slice[i].length; j++) {
 			const sliceArray = slice[i];
-			cardId.innerHTML += '<div class="cardAll" data-mark="' + sliceArray[j].mark + '" data-number="' + sliceArray[j].number + '" draggable="true"><img src="trump/' + sliceArray[j].mark + '-' + sliceArray[j].number + '.png"></div>';
+			cardId.innerHTML += '<div class="cardAll" data-mark="' + sliceArray[j].mark + '" data-number="' + sliceArray[j].number + '" draggable="true"><img src="trump/' + sliceArray[j].mark + '-' + sliceArray[j].number + '.PNG"></div>';
 			
 			// CSSを挿入
 			const cardStyle= cardId.children
@@ -296,7 +296,7 @@ interact('.box-a').dropzone({
         		if ( targetH.mark == relatedH.mark && targetH.number && relatedH.number && relatedTarget == last) {
 
 				// ドロップ範囲に書き加える
-            			target.innerHTML = "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='false'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".png' draggable='false'>"+"</div>";
+            			target.innerHTML = "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='false'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".PNG' draggable='false'>"+"</div>";
 
 				// ドラッグ要素を消す
 				relatedTarget.remove();
@@ -376,12 +376,12 @@ interact('.box-k').dropzone({
         		}else if ( lastH && lastH.mark == relatedH.mark && Number(lastH.number)-1 == Number(relatedH.number) ) {
 
 				// ドロップ範囲に書き換える
-            			target.innerHTML += "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='true'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".png'>"+"</div>"
+            			target.innerHTML += "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='true'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".PNG'>"+"</div>"
 
 				// ドロップ範囲に弟要素を書き加える
 				for (let k = brotherNum; k < brother.length; k++){
 					const littleH = brother[k].dataset;
-					target.innerHTML += "<div class='cardAll' data-mark='"+littleH.mark+"' data-number='"+littleH.number+"' draggable='true'>"+"<img src='trump/" + littleH.mark + "-" + littleH.number + ".png'>"+"</div>"
+					target.innerHTML += "<div class='cardAll' data-mark='"+littleH.mark+"' data-number='"+littleH.number+"' draggable='true'>"+"<img src='trump/" + littleH.mark + "-" + littleH.number + ".PNG'>"+"</div>"
 				}
 
 				// ドラッグ要素の弟要素を消す
@@ -406,12 +406,12 @@ interact('.box-k').dropzone({
 			}else if (target.children.length == 0 && relatedH.number == "13"){
 
 				// ドロップ範囲に書き換える
-            			target.innerHTML = "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='true'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".png'>"+"</div>"
+            			target.innerHTML = "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='true'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".PNG'>"+"</div>"
 
 				// ドロップ範囲に弟要素を書き加える
 				for (let k = brotherNum; k < brother.length; k++){
 					const littleH = brother[k].dataset;
-					target.innerHTML += "<div class='cardAll' data-mark='"+littleH.mark+"' data-number='"+littleH.number+"' draggable='true'>"+"<img src='trump/" + littleH.mark + "-" + littleH.number + ".png'>"+"</div>"
+					target.innerHTML += "<div class='cardAll' data-mark='"+littleH.mark+"' data-number='"+littleH.number+"' draggable='true'>"+"<img src='trump/" + littleH.mark + "-" + littleH.number + ".PNG'>"+"</div>"
 				}
 
 				// ドラッグ要素の弟要素を消す
