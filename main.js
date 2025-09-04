@@ -41,13 +41,11 @@ function resetCard(){
 	// box-a(組札)を初期化
 	for (let i = 0; i < 4; i++){
 		const addA = document.getElementsByClassName("box-a");
-		addA[i].dataset.number = "1";
-		addA[i].dataset.mark = mark[i];
-		addA[i].innerHTML = '<img src="trump/' + mark[i] + '-1' + '.png" style="opacity:0.3;" draggable="false">';
+		addA[i].innerHTML = '<img src="trump/' + mark[i] + '-1' + '.png" style="opacity:0.3;" draggable="false" data-mark="' + mark[i] + '" data-number="1" data-card="sample">';
+	}
 
 	// 試行回数を初期化
 	count = 0;
-	}
 }
 
 
@@ -62,13 +60,16 @@ function makeCard(){
 		cardId = document.getElementById("card"+i);
 		for (let j = 0; j < slice[i].length; j++) {
 			const sliceArray = slice[i];
-			cardId.innerHTML += '<div class="cardAll" data-mark="' + sliceArray[j].mark + '" data-number="' + sliceArray[j].number + '" draggable="true"><img src="trump/' + sliceArray[j].mark + '-' + sliceArray[j].number + '.png"></div>';
+			cardId.innerHTML += '<div class="cardAll" draggable="true"><img src="trump/' + sliceArray[j].mark + '-' + sliceArray[j].number + '.png" draggable="false" data-mark="' + sliceArray[j].mark + '" data-number="' + sliceArray[j].number + '"></div>';
 			
 			// CSSを挿入
 			const cardStyle= cardId.children
 			cardStyle[j].style.top = j * -120 + "px";
 		}
 	}
+
+	// 自動で移動できるカードがないか、詰み＆ゲームオーバーか判断
+	animation();
 }
 
 
@@ -265,76 +266,6 @@ interact('.cardAll[draggable="true"]').draggable({
   	}
 })
 
-
-// box-aにドロップされたら
-interact('.box-a').dropzone({
-  	ondrop(event) {
-
-		pos.x = 0
-    		pos.y = 0
-			
-		const relatedTarget = event.relatedTarget;
-    		const target = event.target;
-    		const dragData = relatedTarget.dataset.interact;
-    		const dropData = target.dataset.interact;
-
-		// ドラッグ要素とドロップ範囲のdatasetを取得
-		const targetH = target.dataset;
-		const relatedH = relatedTarget.dataset;
-
-		// ドラッグ要素の最後の子要素を取得
-		const last = relatedTarget.parentNode.lastElementChild;
-
-		// ドラッグ要素の兄弟要素を取得
-		const brother = relatedTarget.parentElement.children;
-
-
-   		if (dragData === dropData) {
-
-			// box-aに固定させる
-			// マークと数字が同じで最後尾にある場合
-        	if ( targetH.mark == relatedH.mark && targetH.number && relatedH.number && relatedTarget == last) {
-
-				// ドロップ範囲に書き加える
-            	target.innerHTML = "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='false'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".png' draggable='false'>"+"</div>";
-
-				// ドラッグ要素を消す
-				relatedTarget.remove();
-			
-				// 試行回数カウント
-				count++;
-
-				// ドラッグ要素の兄弟要素の位置を調節
-				for (let k = 0; k < brother.length; k++){
-					brother[k].style.top = k * - 120 +"px";
-				}
-
-				// ゲームクリアか判断
-				const cardIds = ['card0', 'card1', 'card2', 'card3', 'card4', 'card5', 'card6'];
-				// すべての子要素が0かどうかをチェック
-				const allEmpty = cardIds.every(id => {
-    					const cardElement = document.getElementById(id);
-    					return cardElement && cardElement.children.length === 0;
-				});
-
-				// すべてのカード要素が空の場合にゲームクリアのを呼び出す
-				if (allEmpty) {
-    					gameClear();
-				}
-
-				// 詰みか判定
-				judge();
-
-			// それ以外は元の位置に戻す
-			}else{
-				relatedTarget.style.transform = "translate(0, 0)";
-			}
-		}
-  	}
-})
-
-
-
 // box-kにドロップされたら
 interact('.box-k').dropzone({
   	ondrop(event) {
@@ -348,15 +279,14 @@ interact('.box-k').dropzone({
     		const dropData = target.dataset.interact;
 
    		if (dragData === dropData) {
-
 				
 			// ドラッグ要素のdatasetを取得
-			const relatedH = relatedTarget.dataset;
+			const relatedH = relatedTarget.querySelector("img").dataset;
 
 			// ドロップ範囲の最後の子要素のdatasetを取得
 			let lastH = null;
 			if (target.lastElementChild){
-				lastH = target.lastElementChild.dataset;
+				lastH = target.lastElementChild.querySelector("img").dataset;
 			}
 
 			// ドラッグ要素の兄弟要素を取得
@@ -368,81 +298,20 @@ interact('.box-k').dropzone({
 	
 				
 			// box-kに移動させる
-			// 同じ列だった場合
-			if (target == relatedTarget.parentElement){
-				relatedTarget.style.transform = "translate(0, 0)";
-
 			// マークが同じで数字が1つ小さい場合
-        	}else if ( lastH && lastH.mark == relatedH.mark && Number(lastH.number)-1 == Number(relatedH.number) ) {
-
-				// ドロップ範囲に書き換える
-            	target.innerHTML += "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='true'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".png'>"+"</div>"
-
-				// ドロップ範囲に弟要素を書き加える
-				for (let k = brotherNum; k < brother.length; k++){
-					const littleH = brother[k].dataset;
-					target.innerHTML += "<div class='cardAll' data-mark='"+littleH.mark+"' data-number='"+littleH.number+"' draggable='true'>"+"<img src='trump/" + littleH.mark + "-" + littleH.number + ".png'>"+"</div>"
-				}
-
-				// ドラッグ要素の弟要素を消す
-				const brotherMany = brother.length;
-				for (let k = brotherNum; k < brotherMany; k++){
-					brother[brotherNum].remove();
-				}
-								
-				// ドラッグ要素を消す
-				relatedTarget.remove();
-
-				// 試行回数カウント
-				count++;
-
-				// ドロップ範囲の要素の位置を調節
-				const targetC = target.children;
-				for (let k = 0; k < targetC.length; k++){
-					targetC[k].style.top =  k * - 120 +"px";
-				}
+        		if ( lastH && lastH.mark == relatedH.mark && Number(lastH.number)-1 == Number(relatedH.number) ) {
+				moveBoxK(target, relatedTarget, brother, brotherNum);
 
 			// 列が空の場合
 			}else if (target.children.length == 0 && relatedH.number == "13"){
-
-				// ドロップ範囲に書き換える
-            	target.innerHTML = "<div class='cardAll' data-mark='"+relatedH.mark+"' data-number='"+relatedH.number+"' draggable='true'>"+"<img src='trump/" + relatedH.mark + "-" + relatedH.number + ".png'>"+"</div>"
-
-				// ドロップ範囲に弟要素を書き加える
-				for (let k = brotherNum; k < brother.length; k++){
-					const littleH = brother[k].dataset;
-					target.innerHTML += "<div class='cardAll' data-mark='"+littleH.mark+"' data-number='"+littleH.number+"' draggable='true'>"+"<img src='trump/" + littleH.mark + "-" + littleH.number + ".png'>"+"</div>"
-				}
-
-				// ドラッグ要素の弟要素を消す
-				const brotherMany = brother.length;
-				for (let k = brotherNum; k < brotherMany; k++){
-					brother[brotherNum].remove();
-				}
-								
-				// ドラッグ要素を消す
-				relatedTarget.remove();
-	
-				// 試行回数カウント
-				count++;
-
-				// ドロップ範囲の要素の位置を調節
-				const targetC = target.children;
-				for (let k = 0; k < targetC.length; k++){
-					targetC[k].style.top =  k * - 120 +"px";
-				}
-
-			// それ以外は元の位置に戻す
-			}else{
-				relatedTarget.style.transform = "translate(0, 0)";
+				moveBoxK(target, relatedTarget, brother, brotherNum);
 			}
 		}
-
-		// 詰みか判定
-		judge();
+		// 自動で移動できるカードがないか、詰み＆ゲームオーバーか判断
+		overJudge();
+		animation();
 	}
 })
-
 //ドラッグ中は重なりを上にする
 .on("dropactivate", (event) => {
 	event.relatedTarget.style.zIndex = "52";
@@ -451,36 +320,141 @@ interact('.box-k').dropzone({
 //ドラッグ中止は重なりを元に戻す
 .on("dropdeactivate", (event) => {
 	event.relatedTarget.style.zIndex = "0";
+	event.relatedTarget.style.transform = "translate(0, 0)";
 })
 
+// box-kの移動
+function moveBoxK(target, relatedTarget, brother, brotherNum){
+
+	// 試行回数カウント
+	count++;
+
+	// ドロップ範囲に書き換える
+        target.innerHTML += "<div class='cardAll' draggable='true'>" + relatedTarget.innerHTML + "</div>";
+
+	// ドロップ範囲に弟要素を書き加える
+	for (let k = brotherNum; k < brother.length; k++){
+		target.innerHTML += "<div class='cardAll' draggable='true'>" + brother[k].innerHTML + "</div>";
+	}
+
+	// 弟要素を消す
+	const brotherMany = brother.length;
+	for (let k = brotherNum; k < brotherMany; k++){
+		brother[brotherNum].remove();
+	}
+		
+	// ドラッグ要素を消す
+	relatedTarget.remove();
+
+	// ドロップ範囲の要素の位置を調節
+	const targetC = target.children;
+	for (let k = 0; k < targetC.length; k++){
+		targetC[k].style.top =  k * - 120 +"px";
+	}
+}
+
 // 詰みだったら
-function judge(){
+function overJudge(){
 	let howMany = 0;
 	let check = 0;
+	let countK = 0;
 	for (let i = 0; i < 7; i++){
 		const row = document.getElementById("card" + i);
 		if (row.children.length > 0){
 			howMany++;
-			const lastNum = Number(row.lastElementChild.dataset.number);
-			const lastMark = row.lastElementChild.dataset.mark;
+
+			const last = row.lastElementChild.querySelector("img").dataset;
 			for (let j = 0; j < row.children.length-1; j++){
-				const searchNum = Number(row.children[j].dataset.number);
-				const searchMark = row.children[j].dataset.mark;
-				if (lastMark == searchMark && searchNum == lastNum-1){
+				const search = row.children[j].querySelector("img").dataset;
+				if (last.mark == search.mark && Number(search.number) == Number(last.number)-1){
 					check++;
 					break;
 				}
 			}
+			for (let j = 0; j < row.children.length-1; j++){
+				if (row.children[j+1].querySelector("img").dataset.number == "13"){
+					countK++;
+				}
+			}
 		}
 	}
-	console.log("試行回数" + count + "回　詰みの列：" + check + "列　現在使われている列：" + howMany + "列");
-	if (howMany == check){
+	console.log("試行回数：" + count + "回　最後尾が詰みの列：" + check + "列　現在の列：" + howMany + "列　動かせるKの数：" + countK + "個");
+
+	if (howMany == check && howMany != 0 && !(countK > 0 && howMany < 7)){
 		console.log("ゲームオーバー");
 	}
 }
 
-//もう一度を押したら関数を呼び出す
-function restart(){
-	document.getElementById("gameClear").style.display = "none";
-	document.getElementById("continue").style.display = "none";
+// ゲームクリアか判断
+function clearJudge(){
+
+	const cardIds = ['card0', 'card1', 'card2', 'card3', 'card4', 'card5', 'card6'];
+
+	// すべての子要素が0かどうかをチェック
+	const allEmpty = cardIds.every(id => {
+    		const cardElement = document.getElementById(id);
+    		return cardElement && cardElement.children.length === 0;
+	});
+
+	// すべてのカード要素が空の場合にゲームクリアのを呼び出す
+	if (allEmpty) {
+    		gameClear();
+	}
 }
+
+// 自動で移動判定
+function animation(){
+	// 組み札の位置を取得
+	const spot = document.getElementsByClassName("box-a");
+	let moved = false;
+	for (let i = 0; i < 4; i++){
+		const spotX = spot[i].getBoundingClientRect().left;
+		const spotY = spot[i].getBoundingClientRect().top;
+		const spotData = spot[i].lastElementChild.dataset;
+
+		// 最後尾のカードを取得
+		for (let j = 0; j < 7; j++){
+			let lastCard = null;
+			lastCard = document.getElementById("card" + j).lastElementChild;
+			if (lastCard){
+				const lastX = lastCard.getBoundingClientRect().left;
+				const lastY = lastCard.getBoundingClientRect().top;
+				const X = spotX - lastX;
+				const Y = spotY - lastY;
+				const lastData = lastCard.querySelector("img").dataset;
+
+				// 最後尾のカードがAの場合 || 最後尾のカードがAより大きい場合
+				if ((lastData.mark ==  spotData.mark && lastData.number == 1) || (lastData.mark ==  spotData.mark && Number(lastData.number) == Number(spotData.number) + 1 && spotData.card !== "sample")){
+
+					// 試行回数カウント
+					count++;
+					moveAnimation(lastCard, spot, i, X, Y);
+					moved = true;
+					return;
+				}
+			}
+		}
+	}
+}
+// 自動で移動
+function moveAnimation(lastCard, spot, i, X, Y){
+	lastCard.style.transition = "transform 0.5s ease-in-out";
+	lastCard.style.transform = `translate(${X}px, ${Y}px)`;
+					
+	lastCard.addEventListener("transitionend", () => {
+
+		// 組札に書き加える
+        	spot[i].innerHTML = lastCard.innerHTML;
+		lastCard.remove();
+
+		// 詰みか判定
+		overJudge();
+
+		// ゲームクリアか判断
+		clearJudge();
+			
+		// 他にも自動で動かせるカードがないか判断
+		animation();
+	});
+}
+
