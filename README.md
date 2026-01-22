@@ -1,7 +1,7 @@
 # Solitaire
 
 ブラウザで動作するソリティア（Solitaire）です。  
-HTML / CSS / JavaScript のみで構成された、静的サイトとして動く小さなゲームプロジェクトです。
+HTML / CSS / JavaScript のみで構成された、Webサイトで動く小さなゲームプロジェクトです。
 
 ## デモ
 https://iris-848.github.io/Solitaire
